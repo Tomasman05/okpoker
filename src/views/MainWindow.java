@@ -4,16 +4,16 @@
 * Copyright: 2021, Nagy József 
 * Date: 2021-09-11
 * Licenc: MIT
-*
+* refaktoring: Vitovszkit Tamás, Date 2023.12.04
 */
 package views;
 
 import java.awt.Color;
-
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
 
 public class MainWindow extends JFrame {
     public JButton startBtn = new JButton("Start");
@@ -30,38 +30,46 @@ public class MainWindow extends JFrame {
     public JButton turnButton = new JButton();
     public JButton riverButton = new JButton();
 
-
     public MainWindow() {
-        this.tablePanel.setSize(100, 100);
-        this.tablePanel.setBackground(Color.LIGHT_GRAY);
-        this.tablePanel.add(flop1Btn);
-        this.tablePanel.add(flop2Btn);
-        this.tablePanel.add(flop3Btn);
-        /* A flop-nak nem kell megjelennie flop előtti állapotban */
-        this.flop1Btn.setVisible(false);
-        this.flop2Btn.setVisible(false);
-        this.flop3Btn.setVisible(false);
-        this.handPanel.add(this.humanCard1Btn);
-        this.handPanel.add(this.humanCard2Btn);
+        initTablePanel();
+        initHandPanel();
+        initBtnPanel();
 
-        this.buttonPanel.add(startBtn);
-        this.buttonPanel.add(nextBtn);
-        this.buttonPanel.add(stopBtn);
-        this.tablePanel.add(turnButton);
-        this.tablePanel.add(riverButton);
-        this.turnButton.setVisible(false);
-        this.riverButton.setVisible(false);
-                
-
-        this.setLayout(new BoxLayout(
-            this.getContentPane(), 
-            BoxLayout.PAGE_AXIS));
-
-        this.add(buttonPanel);
-        this.add(tablePanel);
-        this.add(handPanel);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(300, 250);
+        setLayout(new BoxLayout(getContentPane(), BoxLayout.PAGE_AXIS));
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(300, 250);
     }
-    
+
+    private void initTablePanel() {
+        tablePanel.setSize(100, 100);
+        tablePanel.setBackground(Color.LIGHT_GRAY);
+        tablePanel.add(flop1Btn);
+        tablePanel.add(flop2Btn);
+        tablePanel.add(flop3Btn);
+
+        flop1Btn.setVisible(false);
+        flop2Btn.setVisible(false);
+        flop3Btn.setVisible(false);
+
+        tablePanel.add(turnButton);
+        tablePanel.add(riverButton);
+
+        turnButton.setVisible(false);
+        riverButton.setVisible(false);
+
+        add(tablePanel);
+    }
+
+    private void initHandPanel() {
+        handPanel.add(humanCard1Btn);
+        handPanel.add(humanCard2Btn);
+        add(handPanel);
+    }
+
+    private void initBtnPanel() {
+        buttonPanel.add(startBtn);
+        buttonPanel.add(nextBtn);
+        buttonPanel.add(stopBtn);
+        add(buttonPanel);
+    }
 }
